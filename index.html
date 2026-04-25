@@ -2,23 +2,96 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>ALFY “STUDIO”</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALFY “STUDIO” | Arch Terminal</title>
     <style>
-        body { background-color: #0d1117; color: #58a6ff; font-family: monospace; padding: 50px; }
-        .prompt { color: #7ee787; }
-        h1 { border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+        :root {
+            --bg: #0d1117;
+            --text: #c9d1d9;
+            --primary: #58a6ff;
+            --success: #7ee787;
+            --accent: #cba0ee;
+            --dir: #d2a8ff;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cascadia Code', 'Source Code Pro', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .header { border-bottom: 1px solid #30363d; padding-bottom: 20px; margin-bottom: 30px; }
+        .prompt { color: var(--success); font-weight: bold; }
+        .command { color: var(--primary); }
+        .accent { color: var(--accent); font-weight: bold; }
+        
+        h1, h2 { color: var(--accent); margin-top: 40px; }
+        .system-msg { color: #8b949e; font-style: italic; margin-bottom: 20px; }
+        
+        .project-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .status { color: #f85149; font-weight: bold; font-size: 0.8em; border: 1px solid #f85149; padding: 2px 5px; border-radius: 3px; }
+        
+        ul { list-style: none; padding-left: 0; }
+        li::before { content: " └── "; color: var(--dir); }
+        
+        footer { margin-top: 50px; border-top: 1px solid #30363d; padding-top: 10px; font-size: 0.8em; color: #8b949e; }
     </style>
 </head>
 <body>
-    <h1><span class="prompt">alfy@archlinux:~$</span> cat info.txt</h1>
-    <p>Bienvenido a ALFY “STUDIO”</p>
-    <p>Este es mi proyecto personal de creación de contenido, videojuegos y series.</p>
-    <br>
-    <p><span class="prompt">alfy@archlinux:~$</span> ls proyectos/</p>
-    <ul>
-        <li>LADA (Novela Gráfica)</li>
-        <li>Donnie Origins (FNaF Fanmade)</li>
-        <li>FNaF AS</li>
-    </ul>
+
+    <div class="header">
+        <span class="prompt">alfy@archlinux:~$</span> <span class="command">fetch system_info --project="ALFY STUDIO"</span>
+        <h1 class="accent">ALFY “STUDIO”</h1>
+        <p class="system-msg">[INFO] Cargando manifiesto del estudio v1.0...</p>
+    </div>
+
+    <section>
+        <p><span class="prompt">>></span> Este gran proyecto involucra todas mis creaciones y otros proyectos anteriormente planeados o iniciados, lo cual se relaciona directamente a mi canal.</p>
+        <p><span class="prompt">>></span> Cualquier proyecto realizado por mí como <span class="command">videojuegos</span>, <span class="command">webseries</span>, <span class="command">soundtracks</span> u otras cosas, formarán parte de este mini estudio del cual solo yo y colaboradores forman parte.</p>
+    </section>
+
+    <h2><span class="prompt">alfy@archlinux:~$</span> ls --highlight=destacados proyectos/</h2>
+    
+    <div class="project-card">
+        <strong>LADA</strong> <span class="status">PAUSADO</span>
+        <p>Novela Gráfica aún en desarrollo.</p>
+    </div>
+
+    <div class="project-card">
+        <strong>Donnie Origins</strong>
+        <p>Fanmade basado en la franquicia de Scott Cawthon "Five Nights At Freddy's".</p>
+    </div>
+
+    <div class="project-card">
+        <strong>FNaF AS (Alternative Stories)</strong>
+        <p>Serie tipo "What if" basado en el universo original de los juegos pero en otra línea temporal.</p>
+    </div>
+
+    <div class="project-card">
+        <strong>?</strong> <span class="status" style="color:var(--success); border-color:var(--success);">TOP SECRET</span>
+        <p>Proyecto secreto en fases y desarrollo muy prematuro (aún en planeamiento).</p>
+    </div>
+
+    <h2><span class="prompt">alfy@archlinux:~$</span> cat about_future.log</h2>
+    <section>
+        <p>¿Qué será de estos proyectos? Estos se irán avanzando y desarrollando independientemente con ayuda de gente interesada en apoyarlos.</p>
+        <p>No espero casi nada de apoyo ni interés por mi poca demostración (mi arte, dibujos, 3D, historias o programación principiante).</p>
+        <p>Pero aún así seguiré anotando aquí avances y publicando alguno que otro en YouTube.</p>
+    </section>
+
+    <footer>
+        <span class="prompt">alfy@archlinux:~$</span> <span class="command">uptime</span>
+        <p>Host: github.io | User: Alfy181R | OS: Arch Linux Environment</p>
+    </footer>
+
 </body>
 </html>
