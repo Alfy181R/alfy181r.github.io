@@ -12,97 +12,64 @@
             --success: #7ee787;
             --accent: #cba0ee;
             --dir: #d2a8ff;
-            --warning: #e3b341;
+            --card-bg: #161b22;
+            --card-border: #30363d;
         }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: 'Cascadia Code', 'Source Code Pro', monospace;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        .header { border-bottom: 1px solid #30363d; padding-bottom: 20px; margin-bottom: 30px; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Cascadia Code', monospace; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
+        .header { border-bottom: 1px solid var(--card-border); padding-bottom: 20px; text-align: center; }
+        .nav-bar { background: #161b22; padding: 10px; border: 1px solid var(--card-border); margin-bottom: 20px; display: flex; gap: 20px; justify-content: center; }
+        .nav-link { color: var(--primary); cursor: pointer; text-decoration: none; font-weight: bold; }
+        .nav-link:hover { color: var(--success); }
         .prompt { color: var(--success); font-weight: bold; }
         .command { color: var(--primary); }
-        .accent { color: var(--accent); font-weight: bold; }
+        .project-card { background: #161b22; border: 1px solid var(--card-border); padding: 15px; margin-bottom: 20px; border-radius: 6px; }
+        .fangame-logo { width: 50px; height: 50px; background: black; border: 2px solid var(--warning); border-radius: 50%; float: left; margin-right: 15px; display: flex; align-items: center; justify-content: center; }
+        .eye { width: 20px; height: 20px; background: black; border: 3px solid yellow; border-radius: 50%; box-shadow: 0 0 10px yellow; }
         
-        h1, h2 { color: var(--accent); margin-top: 40px; }
-        .system-msg { color: #8b949e; font-style: italic; margin-bottom: 20px; }
-        
-        .project-card, .social-card {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 20px;
-            transition: transform 0.2s;
-        }
-        .project-card:hover { border-color: var(--primary); }
-        
-        .status { color: #f85149; font-weight: bold; font-size: 0.8em; border: 1px solid #f85149; padding: 2px 5px; border-radius: 3px; }
-        
-        a { color: var(--primary); text-decoration: none; }
-        a:hover { text-decoration: underline; color: var(--success); }
-
-        .btn-link {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 5px 10px;
-            border: 1px solid var(--primary);
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-
-        ul { list-style: none; padding-left: 0; }
-        li::before { content: " └── "; color: var(--dir); }
-        
-        footer { margin-top: 50px; border-top: 1px solid #30363d; padding-top: 10px; font-size: 0.8em; color: #8b949e; }
+        /* Estilos del Foro */
+        #forum-section { display: none; background: #0d1117; padding: 20px; border: 1px solid var(--primary); }
+        .forum-msg { color: var(--accent); border-left: 3px solid var(--primary); padding-left: 10px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <span class="prompt">alfy@archlinux:~$</span> <span class="command">fetch system_info --project="ALFY STUDIO"</span>
-        <h1 class="accent">ALFY “STUDIO”</h1>
-        <p class="system-msg">[INFO] Cargando manifiesto del estudio v1.1...</p>
+        <h1 style="color:var(--accent)">ALFY “STUDIO”</h1>
+        <p>[SISTEMA OPERATIVO: ALFY-OS V2.0]</p>
     </div>
 
-    <section>
-        <p><span class="prompt">>></span> Este gran proyecto involucra todas mis creaciones y otros proyectos anteriormente planeados o iniciados.</p>
-        <p><span class="prompt">>></span> Cualquier contenido como <span class="command">videojuegos</span> o <span class="command">webseries</span> forman parte de este mini estudio.</p>
-    </section>
-
-    <h2><span class="prompt">alfy@archlinux:~$</span> ls --social-media links/</h2>
-    <div class="social-card">
-        <p><strong>YouTube:</strong> <a href="https://www.youtube.com/@ALFY181X" target="_blank">@ALFY181X</a></p>
-        <p><strong>TikTok:</strong> <a href="https://www.tiktok.com/@a181xy" target="_blank">@a181xy</a></p>
+    <div class="nav-bar">
+        <span class="nav-link" onclick="showSection('home')">[ 1. INICIO ]</span>
+        <span class="nav-link" onclick="showSection('forum')">[ 2. FORO / OPINIONES ]</span>
     </div>
 
-    <h2><span class="prompt">alfy@archlinux:~$</span> ls --projects destacados/</h2>
-    
-    <div class="project-card">
-        <strong>Donnie Origins</strong> <span class="status" style="color:var(--success); border-color:var(--success);">DISPONIBLE</span>
-        <p>Fanmade basado en la franquicia de "Five Nights At Freddy's".</p>
-        <a href="https://gamejolt.com/games/Donnies2001/885221" target="_blank" class="btn-link">Acceder a GameJolt >></a>
+    <div id="home-section">
+        <p><span class="prompt">alfy@arch:~$</span> ls --projects</p>
+        
+        <div class="project-card">
+            <div class="fangame-logo"><div class="eye"></div></div>
+            <strong>Donnie Origins</strong>
+            <p>Fanmade de FNaF. Deja tus ideas en el foro.</p>
+            <a href="https://gamejolt.com/games/Donnies2001/885221" target="_blank" style="color:var(--primary)">Ir a GameJolt</a>
+        </div>
+        </div>
+
+    <div id="forum-section">
+        <div class="forum-msg">
+            <span class="prompt">>> FORO ABIERTO:</span> Bien venido al área de feedback. Aquí puedes dejar tus ideas para Donnie Origins o LADA.
+        </div>
+        
+        <div id="disqus_thread">
+            <p style="text-align:center; color:#8b949e;">[ Cargando terminal de comentarios... ]</p>
+            <p style="font-size: 0.8em; color: gray;">Para habilitar el foro real, debes registrar tu web en disqus.com y pegar el código aquí.</p>
+        </div>
     </div>
 
-    <div class="project-card">
-        <strong>LADA</strong> <span class="status">PAUSADO</span>
-        <p>Novela Gráfica aún en desarrollo.</p>
-    </div>
-
-    <div class="project-card">
-        <strong>FNaF AS (Alternative Stories)</strong>
-        <p>Serie tipo "What if" en otra línea temporal.</p>
-    </div>
-
-    <footer>
-        <span class="prompt">alfy@archlinux:~$</span> <span class="command">uptime</span>
-        <p>Host: github.io | User: Alfy181R | Status: Online</p>
-    </footer>
-
+    <script>
+        function showSection(section) {
+            document.getElementById('home-section').style.display = section === 'home' ? 'block' : 'none';
+            document.getElementById('forum-section').style.display = section === 'forum' ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
