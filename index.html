@@ -11,65 +11,159 @@
             --primary: #58a6ff;
             --success: #7ee787;
             --accent: #cba0ee;
-            --dir: #d2a8ff;
-            --card-bg: #161b22;
+            --warning: #f1e05a;
             --card-border: #30363d;
         }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Cascadia Code', monospace; margin: 0; padding: 20px; max-width: 900px; margin: auto; }
-        .header { border-bottom: 1px solid var(--card-border); padding-bottom: 20px; text-align: center; }
-        .nav-bar { background: #161b22; padding: 10px; border: 1px solid var(--card-border); margin-bottom: 20px; display: flex; gap: 20px; justify-content: center; }
-        .nav-link { color: var(--primary); cursor: pointer; text-decoration: none; font-weight: bold; }
-        .nav-link:hover { color: var(--success); }
-        .prompt { color: var(--success); font-weight: bold; }
-        .command { color: var(--primary); }
-        .project-card { background: #161b22; border: 1px solid var(--card-border); padding: 15px; margin-bottom: 20px; border-radius: 6px; }
-        .fangame-logo { width: 50px; height: 50px; background: black; border: 2px solid var(--warning); border-radius: 50%; float: left; margin-right: 15px; display: flex; align-items: center; justify-content: center; }
-        .eye { width: 20px; height: 20px; background: black; border: 3px solid yellow; border-radius: 50%; box-shadow: 0 0 10px yellow; }
         
-        /* Estilos del Foro */
-        #forum-section { display: none; background: #0d1117; padding: 20px; border: 1px solid var(--primary); }
-        .forum-msg { color: var(--accent); border-left: 3px solid var(--primary); padding-left: 10px; margin-bottom: 20px; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cascadia Code', monospace;
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        /* --- Header y Logo Principal --- */
+        .header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 20px; }
+        
+        /* Imagen principal del estudio (Base64 para que no necesites archivos externos) */
+        .studio-banner {
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid var(--card-border);
+            margin: 10px 0;
+        }
+
+        /* --- Navegación Estilo Terminal --- */
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: #161b22;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border: 1px inset var(--card-border);
+        }
+
+        .nav-item {
+            color: var(--primary);
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .nav-item:hover { color: var(--success); text-decoration: underline; }
+
+        /* --- Contenedores de Secciones --- */
+        .content-section { display: none; animation: fadeIn 0.5s; }
+        .active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .prompt { color: var(--success); font-weight: bold; }
+        .dir { color: var(--accent); }
+
+        /* --- Estilo de los Proyectos --- */
+        .project-header { display: flex; align-items: center; gap: 20px; margin-top: 20px; }
+        
+        /* Logo Pixel Art del Ojo para Donnie Origins */
+        .eye-logo {
+            width: 60px;
+            height: 60px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #333;
+            box-shadow: 0 0 15px rgba(241, 224, 90, 0.3);
+        }
+        .iris {
+            width: 25px;
+            height: 25px;
+            border: 4px solid var(--warning);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--warning);
+        }
+
+        .info-box {
+            background: #161b22;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-top: 15px;
+            line-height: 1.8;
+        }
+
+        h2 { color: var(--accent); border-bottom: 1px solid #30363d; padding-bottom: 5px; }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1 style="color:var(--accent)">ALFY “STUDIO”</h1>
-        <p>[SISTEMA OPERATIVO: ALFY-OS V2.0]</p>
+        <h1>ALFY “STUDIO”</h1>
+        <p>[ System: Arch Linux | Status: Online ]</p>
     </div>
 
-    <div class="nav-bar">
-        <span class="nav-link" onclick="showSection('home')">[ 1. INICIO ]</span>
-        <span class="nav-link" onclick="showSection('forum')">[ 2. FORO / OPINIONES ]</span>
+    <div class="nav-menu">
+        <span class="nav-item" onclick="openTab('main')">[ 1. INICIO ]</span>
+        <span class="nav-item" onclick="openTab('donnie')">[ 2. DONNIE ORIGINS ]</span>
+        <span class="nav-item" onclick="openTab('lada')">[ 3. LADA ]</span>
+        <span class="nav-item" onclick="openTab('fnafas')">[ 4. FNAF AS ]</span>
     </div>
 
-    <div id="home-section">
-        <p><span class="prompt">alfy@arch:~$</span> ls --projects</p>
-        
-        <div class="project-card">
-            <div class="fangame-logo"><div class="eye"></div></div>
-            <strong>Donnie Origins</strong>
-            <p>Fanmade de FNaF. Deja tus ideas en el foro.</p>
-            <a href="https://gamejolt.com/games/Donnies2001/885221" target="_blank" style="color:var(--primary)">Ir a GameJolt</a>
+    <div id="main" class="content-section active">
+        <p><span class="prompt">alfy@arch:~$</span> fetch-studio-info</p>
+        <div class="info-box">
+            <p>Bienvenido a la base de datos de <strong>Alfy Studio</strong>. Selecciona un proyecto en el menú superior para desplegar los archivos de información detallada.</p>
+            <p>Explora mis fangames de FNaF, series de terror analógico y mis historias originales.</p>
         </div>
-        </div>
+    </div>
 
-    <div id="forum-section">
-        <div class="forum-msg">
-            <span class="prompt">>> FORO ABIERTO:</span> Bien venido al área de feedback. Aquí puedes dejar tus ideas para Donnie Origins o LADA.
+    <div id="donnie" class="content-section">
+        <div class="project-header">
+            <div class="eye-logo"><div class="iris"></div></div>
+            <h2>Donnie Origins (Project_FNaF)</h2>
         </div>
-        
-        <div id="disqus_thread">
-            <p style="text-align:center; color:#8b949e;">[ Cargando terminal de comentarios... ]</p>
-            <p style="font-size: 0.8em; color: gray;">Para habilitar el foro real, debes registrar tu web en disqus.com y pegar el código aquí.</p>
+        <div class="info-box">
+            <p><span class="prompt">Estatus:</span> En desarrollo (Desde 2021)</p>
+            <p><strong>Donnie Origins</strong> es un fangame de FNaF que ha evolucionado constantemente desde sus inicios en 2021. Es uno de mis proyectos más ambiciosos hasta la fecha.</p>
+            <p><strong>Sinopsis:</strong> El protagonista, Nick, despierta aturdido en un lugar aparentemente desconocido. Sin embargo, a medida que explora, el sitio le resulta extrañamente familiar al encontrarse con viejos "conocidos". ¿Podrá sobrevivir a la noche?</p>
+            <p>Este proyecto expandirá su universo con múltiples animaciones y una miniserie basada en la estética de <strong>Terror Analógico (VHS)</strong>.</p>
+            <a href="https://gamejolt.com/games/Donnies2001/885221" target="_blank" style="color:var(--primary)">> Acceder a GameJolt</a>
+        </div>
+    </div>
+
+    <div id="lada" class="content-section">
+        <h2>LADA (Original Universe)</h2>
+        <div class="info-box">
+            <p><span class="prompt">Estatus:</span> En Pausa</p>
+            <p><strong>LADA</strong> es un proyecto centrado en personajes originales, principalmente <strong>"Alfy"</strong> (quien comparte mi nombre). Es una historia de ficción con una trama extremadamente extensa y profunda.</p>
+            <p>Actualmente, el desarrollo se encuentra en pausa para priorizar otros proyectos activos del estudio, pero sigue siendo un pilar fundamental de mi contenido creativo.</p>
+        </div>
+    </div>
+
+    <div id="fnafas" class="content-section">
+        <h2>FNaF AS (Web Series)</h2>
+        <div class="info-box">
+            <p><span class="prompt">Estatus:</span> Planeamiento</p>
+            <p>¿Qué pasaría si la historia original de Five Nights at Freddy's tomara rumbos diferentes? <strong>FNaF AS</strong> es una web-serie bajo el concepto "What If...?" (¿Qué pasaría si...?).</p>
+            <p>A través de miniepisodios, exploraremos cambios clave en la cronología original para ver cómo habrían afectado al destino de los personajes y la pizzería.</p>
         </div>
     </div>
 
     <script>
-        function showSection(section) {
-            document.getElementById('home-section').style.display = section === 'home' ? 'block' : 'none';
-            document.getElementById('forum-section').style.display = section === 'forum' ? 'block' : 'none';
+        function openTab(tabName) {
+            var i;
+            var x = document.getElementsByClassName("content-section");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
         }
     </script>
+
 </body>
 </html>
