@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALFY “STUDIO” | Arch Terminal</title>
+    <title>ALFY “STUDIO” | Terminal</title>
     <style>
         :root {
             --bg: #0d1117;
             --text: #c9d1d9;
             --primary: #58a6ff;
             --success: #7ee787;
-            --accent: #cba0ee;
-            --warning: #f1e05a;
+            --accent: #bf91f3; /* Morado Alfy */
             --card-bg: #161b22;
             --card-border: #30363d;
+            --neon-glow: 0 0 10px rgba(191, 145, 243, 0.5);
         }
         
         body {
@@ -25,26 +25,48 @@
             margin: auto;
         }
 
-        .header { text-align: center; border-bottom: 1px solid var(--card-border); padding-bottom: 20px; margin-bottom: 20px; }
-        
-        /* --- LOGOS CSS --- */
-        .logo-container { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
-        
-        /* Ojo de Donnie */
-        .eye-logo {
-            width: 40px; height: 40px; background: #000; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; border: 2px solid #333;
-        }
-        .iris { width: 18px; height: 18px; border: 3px solid var(--warning); border-radius: 50%; box-shadow: 0 0 8px var(--warning); }
-
-        /* Logo Alfy (A estilizada) */
-        .alfy-logo {
-            width: 40px; height: 40px; background: var(--accent); color: #000;
-            border-radius: 5px; display: flex; align-items: center; justify-content: center;
-            font-weight: bold; font-size: 24px; box-shadow: 0 0 10px var(--accent);
+        /* --- BOTÓN DE IDIOMA (ARRIBA DERECHA) --- */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
 
-        /* --- INTERFAZ --- */
+        .btn-lang {
+            background: #1c2128;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .btn-lang:hover { background: var(--accent); color: #000; }
+
+        /* --- HEADER Y LOGOS --- */
+        .header { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            border-bottom: 1px solid var(--card-border); 
+            padding-bottom: 20px; 
+            margin-top: 40px;
+            margin-bottom: 20px; 
+        }
+        
+        .freddy-logo { width: 70px; height: 70px; fill: #4a342a; }
+
+        .title-container h1 {
+            margin: 0;
+            font-size: 2.2em;
+            color: var(--accent);
+            text-shadow: var(--neon-glow);
+        }
+
+        /* --- TARJETAS --- */
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -53,126 +75,157 @@
             border-radius: 8px;
         }
 
+        .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .alfy-icon { color: var(--accent); font-weight: bold; font-size: 1.5em; text-shadow: var(--neon-glow); }
+
         .btn-more {
             background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 5px 10px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 15px;
             cursor: pointer;
             font-family: inherit;
             margin-top: 10px;
+            border-radius: 4px;
         }
 
-        .btn-more:hover { background: var(--primary); color: #000; }
+        .btn-more:hover { background: var(--accent); color: #000; }
 
-        /* --- REDES SOCIALES --- */
         .social-bar {
             background: #090c10;
             padding: 15px;
             border-radius: 5px;
             text-align: center;
             margin-top: 40px;
-            border: 1px solid var(--primary);
+            border: 1px solid var(--accent);
         }
-        .social-link { color: var(--success); text-decoration: none; margin: 0 10px; font-weight: bold; }
-        .social-link:hover { text-decoration: underline; }
 
-        /* --- PESTAÑAS OCULTAS --- */
+        /* --- OVERLAY --- */
         #details-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             z-index: 100;
             padding: 40px 20px;
             overflow-y: auto;
         }
         .details-content {
             background: var(--bg);
-            border: 2px solid var(--primary);
+            border: 2px solid var(--accent);
             max-width: 700px;
             margin: auto;
             padding: 30px;
             position: relative;
         }
-        .close-btn { position: absolute; top: 10px; right: 20px; color: red; cursor: pointer; font-size: 20px; }
+        .close-btn { position: absolute; top: 10px; right: 20px; color: #ff5555; cursor: pointer; font-weight: bold; }
 
-        .prompt { color: var(--success); }
+        .prompt { color: var(--success); font-weight: bold; }
     </style>
 </head>
 <body>
 
+    <div class="lang-switcher">
+        <button class="btn-lang" onclick="toggleLanguage()" id="langBtn">EN / ES</button>
+    </div>
+
     <div class="header">
-        <h1 style="color: var(--accent);">ALFY “STUDIO”</h1>
-        <p>[ System: Arch Linux | Status: Active ]</p>
+        <svg class="freddy-logo" viewBox="0 0 100 100">
+            <path d="M50 10c-20 0-35 15-35 35 0 10 5 18 12 24l-2 15h50l-2-15c7-6 12-14 12-24 0-20-15-35-35-35z"/>
+            <circle cx="35" cy="45" r="8" fill="#000"/>
+            <circle cx="65" cy="45" r="8" fill="#000"/>
+            <rect x="40" y="5" width="20" height="10" fill="#222"/>
+            <rect x="35" y="15" width="30" height="3" fill="#222"/>
+        </svg>
+
+        <div class="title-container">
+            <h1>ALFY “STUDIO”</h1>
+            <p id="system-status">[ System: Studio OS v2.1 | Status: Active ]</p>
+        </div>
     </div>
 
     <div id="main-view">
-        <p><span class="prompt">alfy@arch:~$</span> ls-projects --active</p>
+        <p><span class="prompt">alfy@studio:~$</span> <span id="cmd-text">ls-projects --active</span></p>
 
         <div class="project-card">
-            <div class="logo-container">
-                <div class="eye-logo"><div class="iris"></div></div>
-                <h2 style="margin:0">Donnie Origins</h2>
-            </div>
-            <p>Fangame de FNaF en desarrollo desde 2021. Terror analógico y animaciones.</p>
-            <button class="btn-more" onclick="openDetails('donnie')">[ VER ARCHIVO COMPLETO ]</button>
-            <a href="https://gamejolt.com/games/Donnies2001/885221" class="social-link" style="margin-left:15px">GameJolt</a>
+            <div class="logo-row"><span class="alfy-icon">A</span><h2 style="margin:0">Donnie Origins</h2></div>
+            <p id="desc-donnie">Fangame de FNaF (2021-Presente). Terror analógico y ambición máxima.</p>
+            <button class="btn-more" onclick="openDetails('donnie')" id="btn-donnie">[ VER ARCHIVO ]</button>
+            <a href="https://gamejolt.com/games/Donnies2001/885221" class="btn-more" style="text-decoration:none; margin-left:10px">GameJolt</a>
         </div>
 
         <div class="project-card">
-            <div class="logo-container">
-                <div class="alfy-logo">A</div>
-                <h2 style="margin:0">LADA</h2>
-            </div>
-            <p>Universo original centrado en "Alfy". Historia de ficción extensa.</p>
-            <button class="btn-more" onclick="openDetails('lada')">[ VER ARCHIVO COMPLETO ]</button>
+            <div class="logo-row"><span class="alfy-icon">A</span><h2 style="margin:0">LADA</h2></div>
+            <p id="desc-lada">Historia de ficción original protagonizada por Alfy. Trama extensa.</p>
+            <button class="btn-more" onclick="openDetails('lada')" id="btn-lada">[ VER ARCHIVO ]</button>
         </div>
 
         <div class="project-card">
-            <h2 style="color:var(--primary)">FNaF AS (What If...?)</h2>
-            <p>Web-serie explorando cambios en la cronología original de Scott Cawthon.</p>
-            <button class="btn-more" onclick="openDetails('fnafas')">[ VER ARCHIVO COMPLETO ]</button>
+            <div class="logo-row"><span class="alfy-icon">A</span><h2 style="margin:0">FNaF AS</h2></div>
+            <p id="desc-fnafas">Web-serie explorando cambios clave en la historia original de Scott Cawthon.</p>
+            <button class="btn-more" onclick="openDetails('fnafas')" id="btn-fnafas">[ VER ARCHIVO ]</button>
         </div>
 
         <div class="social-bar">
-            <p><span class="prompt">alfy@arch:~$</span> contact --list</p>
-            <a href="#" class="social-link">YouTube</a> | 
-            <a href="#" class="social-link">TikTok</a> | 
-            <a href="#" class="social-link">Discord</a> | 
-            <a href="https://gamejolt.com/@Alfy18" class="social-link">GameJolt</a>
+            <p><span class="prompt">alfy@studio:~$</span> ./social-links.sh</p>
+            <a href="#" style="color:var(--success); text-decoration:none; margin:0 10px;">YouTube</a> | 
+            <a href="#" style="color:var(--success); text-decoration:none; margin:0 10px;">TikTok</a> | 
+            <a href="https://gamejolt.com/@Alfy18" style="color:var(--success); text-decoration:none; margin:0 10px;">GameJolt</a>
         </div>
     </div>
 
     <div id="details-overlay">
         <div class="details-content">
-            <span class="close-btn" onclick="closeDetails()">[ X ]</span>
+            <span class="close-btn" onclick="closeDetails()" id="close-text">[ CERRAR ]</span>
             <div id="details-text"></div>
         </div>
     </div>
 
     <script>
-        const info = {
-            donnie: `
-                <h2 style="color:var(--warning)">DONNIE ORIGINS</h2>
-                <p><span class="prompt">>> INFO:</span> Desarrollado desde 2021, ha pasado por muchos cambios pero sigue siendo el proyecto más ambicioso del estudio.</p>
-                <p><span class="prompt">>> CONTENIDO:</span> Tendrá múltiples animaciones y una miniserie basada en el <strong>Terror Analógico</strong>.</p>
-                <p><span class="prompt">>> SINOPSIS:</span> Nick despierta aturdido en un lugar que parece desconocido, pero que resulta extrañamente familiar al encontrarse con viejos conocidos. ¿Podrá sobrevivir la noche?</p>
-            `,
-            lada: `
-                <h2 style="color:var(--accent)">LADA</h2>
-                <p><span class="prompt">>> INFO:</span> Basado en personajes originales, principalmente <strong>Alfy</strong>.</p>
-                <p><span class="prompt">>> ESTADO:</span> Es una historia de ficción con una trama muy extensa, actualmente en pausa para priorizar otros proyectos.</p>
-            `,
-            fnafas: `
-                <h2 style="color:var(--primary)">FNaF AS</h2>
-                <p><span class="prompt">>> INFO:</span> Web-serie en planeamiento bajo el concepto "¿Qué pasaría si...?".</p>
-                <p><span class="prompt">>> FORMATO:</span> Mini episodios que alteran la historia original de FNaF para explorar nuevas posibilidades narrativas.</p>
-            `
+        let currentLang = 'es';
+
+        const translations = {
+            es: {
+                status: "[ System: Studio OS v2.1 | Estado: Activo ]",
+                btnMore: "[ VER ARCHIVO ]",
+                close: "[ CERRAR ]",
+                descDonnie: "Fangame de FNaF (2021-Presente). Terror analógico y ambición máxima.",
+                descLada: "Historia de ficción original protagonizada por Alfy. Trama extensa.",
+                descFnafas: "Web-serie explorando cambios clave en la historia original de Scott Cawthon.",
+                infoDonnie: `<h2>DONNIE ORIGINS</h2><p><span class="prompt">>> ORIGEN:</span> Desde 2021. <br><span class="prompt">>> FORMATO:</span> Terror Analógico y animaciones.<br><span class="prompt">>> SINOPSIS:</span> Nick despierta en un lugar familiar pero desconocido. ¿Podrá sobrevivir?</p>`,
+                infoLada: `<h2>LADA</h2><p><span class="prompt">>> INFO:</span> Personajes originales. <br><span class="prompt">>> ESTATUS:</span> Trama extensa, actualmente en pausa.</p>`,
+                infoFnafas: `<h2>FNaF AS</h2><p><span class="prompt">>> CONCEPTO:</span> Web-serie "¿Qué pasaría si?". <br><span class="prompt">>> DESCRIPCIÓN:</span> Cambios en la historia original de FNaF.</p>`
+            },
+            en: {
+                status: "[ System: Studio OS v2.1 | Status: Active ]",
+                btnMore: "[ VIEW FILE ]",
+                close: "[ CLOSE ]",
+                descDonnie: "FNaF Fangame (2021-Present). Analog horror and maximum ambition.",
+                descLada: "Original fiction story starring Alfy. Extensive plot.",
+                descFnafas: "Web-series exploring key changes in Scott Cawthon's original story.",
+                infoDonnie: `<h2>DONNIE ORIGINS</h2><p><span class="prompt">>> ORIGIN:</span> Since 2021. <br><span class="prompt">>> FORMAT:</span> Analog Horror and animations.<br><span class="prompt">>> SYNOPSIS:</span> Nick wakes up in a familiar yet unknown place. Can he survive the night?</p>`,
+                infoLada: `<h2>LADA</h2><p><span class="prompt">>> INFO:</span> Original characters. <br><span class="prompt">>> STATUS:</span> Extensive plot, currently on hiatus.</p>`,
+                infoFnafas: `<h2>FNaF AS</h2><p><span class="prompt">>> CONCEPT:</span> "What If?" web-series. <br><span class="prompt">>> DESCRIPTION:</span> Exploring alternative paths in the FNaF lore.</p>`
+            }
         };
 
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            const t = translations[currentLang];
+            
+            document.getElementById('system-status').innerText = t.status;
+            document.getElementById('close-text').innerText = t.close;
+            document.querySelectorAll('.btn-more').forEach(btn => {
+                if(btn.tagName === "BUTTON") btn.innerText = t.btnMore;
+            });
+            document.getElementById('desc-donnie').innerText = t.descDonnie;
+            document.getElementById('desc-lada').innerText = t.descLada;
+            document.getElementById('desc-fnafas').innerText = t.descFnafas;
+        }
+
         function openDetails(id) {
-            document.getElementById('details-text').innerHTML = info[id];
+            const t = translations[currentLang];
+            document.getElementById('details-text').innerHTML = t['info' + id.charAt(0).toUpperCase() + id.slice(1)];
             document.getElementById('details-overlay').style.display = 'block';
         }
 
