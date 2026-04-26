@@ -10,8 +10,8 @@
             --text: #c9d1d9;
             --primary: #58a6ff;
             --success: #7ee787;
-            --accent: #bf91f3; /* Morado Alfy */
-            --warning: #f1e05a; /* Amarillo Donnie */
+            --accent: #bf91f3; 
+            --warning: #f1e05a; 
             --card-bg: #161b22;
             --card-border: #30363d;
             --neon-glow: 0 0 10px rgba(191, 145, 243, 0.5);
@@ -26,7 +26,6 @@
             margin: auto;
         }
 
-        /* --- BOTÓN DE IDIOMA --- */
         .lang-switcher { position: absolute; top: 20px; right: 20px; }
         .btn-lang {
             background: #1c2128; color: var(--accent); border: 1px solid var(--accent);
@@ -34,14 +33,12 @@
         }
         .btn-lang:hover { background: var(--accent); color: #000; }
 
-        /* --- HEADER Y LOGO NUEVO --- */
         .header { 
             display: flex; align-items: center; justify-content: center; gap: 20px;
             border-bottom: 1px solid var(--card-border); padding-bottom: 20px; 
             margin-top: 40px; margin-bottom: 20px; 
         }
         
-        /* Logo: Círculo morado con ojos blancos */
         .main-logo-circle {
             width: 70px; height: 70px; background: var(--accent);
             border-radius: 50%; display: flex; align-items: center;
@@ -53,10 +50,17 @@
             margin: 0; font-size: 2.2em; color: var(--accent); text-shadow: var(--neon-glow);
         }
 
-        /* --- ICONOS DE PROYECTOS --- */
+        .about-section {
+            background: rgba(88, 166, 255, 0.05);
+            border: 1px dashed var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
         .logo-row { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
 
-        /* Ojo Amarillo (Donnie) */
         .eye-donnie {
             width: 35px; height: 35px; background: #000; border-radius: 50%;
             display: flex; align-items: center; justify-content: center; border: 2px solid #333;
@@ -66,17 +70,14 @@
             border-radius: 50%; box-shadow: 0 0 8px var(--warning); 
         }
 
-        /* Logo Alfy (LADA) */
         .alfy-icon { 
             width: 35px; height: 35px; background: var(--accent); color: #000;
             display: flex; align-items: center; justify-content: center;
             border-radius: 4px; font-weight: bold; font-size: 1.2em;
         }
 
-        /* Logo Freddy (FNaF AS) */
         .freddy-mini { width: 35px; height: 35px; fill: #4a342a; }
 
-        /* --- TARJETAS Y BOTONES --- */
         .project-card {
             background: var(--card-bg); border: 1px solid var(--card-border);
             padding: 20px; margin-bottom: 20px; border-radius: 8px;
@@ -92,6 +93,8 @@
             background: #090c10; padding: 15px; border-radius: 5px;
             text-align: center; margin-top: 40px; border: 1px solid var(--accent);
         }
+        .social-link { color: var(--success); text-decoration: none; margin: 0 10px; font-weight: bold; }
+        .social-link:hover { text-decoration: underline; }
 
         #details-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -116,14 +119,20 @@
             <div class="main-eye"></div>
             <div class="main-eye"></div>
         </div>
-
         <div class="title-container">
             <h1>ALFY “STUDIO”</h1>
-            <p id="system-status">[ System: Studio OS v2.2 | Status: Active ]</p>
+            <p id="system-status">[ System: Studio OS v2.4 | Status: Active ]</p>
         </div>
     </div>
 
     <div id="main-view">
+        <div class="about-section">
+            <p><span class="prompt">alfy@studio:~$</span> cat about_me.txt</p>
+            <p id="about-text">
+                ¡Hola! Soy Alfy, un pequeño creador de contenido apasionado por el arte y el desarrollo de proyectos creativos. Esta página es mi base de datos personal donde archivo mis trabajos, desde fangames de terror hasta series originales. ¡Gracias por echar un vistazo a mi mundo!
+            </p>
+        </div>
+
         <p><span class="prompt">alfy@studio:~$</span> <span>ls-projects --active</span></p>
 
         <div class="project-card">
@@ -131,9 +140,9 @@
                 <div class="eye-donnie"><div class="iris-donnie"></div></div>
                 <h2 style="margin:0">Donnie Origins</h2>
             </div>
-            <p id="desc-donnie">Fangame de FNaF (2021-Presente). Terror analógico y ambición máxima.</p>
+            <p id="desc-donnie">Fangame de FNaF en desarrollo desde 2021. Terror analógico y ambición máxima.</p>
             <button class="btn-more" onclick="openDetails('donnie')">[ VER ARCHIVO ]</button>
-            <a href="https://gamejolt.com/games/Donnies2001/885221" class="btn-more" style="text-decoration:none; margin-left:10px">GameJolt</a>
+            <a href="https://gamejolt.com/games/Donnies2001/885221" class="social-link" target="_blank" style="margin-left:15px">GameJolt</a>
         </div>
 
         <div class="project-card">
@@ -141,7 +150,7 @@
                 <div class="alfy-icon">A</div>
                 <h2 style="margin:0">LADA</h2>
             </div>
-            <p id="desc-lada">Historia de ficción original protagonizada por Alfy. Trama extensa.</p>
+            <p id="desc-lada">Proyecto basado en personajes originales. Historia de ficción con trama extensa.</p>
             <button class="btn-more" onclick="openDetails('lada')">[ VER ARCHIVO ]</button>
         </div>
 
@@ -156,15 +165,15 @@
                 </svg>
                 <h2 style="margin:0">FNaF AS</h2>
             </div>
-            <p id="desc-fnafas">Web-serie explorando cambios clave en la historia original de Scott Cawthon.</p>
+            <p id="desc-fnafas">Web-serie "What If" basada en la historia original de FNaF con cambios clave.</p>
             <button class="btn-more" onclick="openDetails('fnafas')">[ VER ARCHIVO ]</button>
         </div>
 
         <div class="social-bar">
-            <p><span class="prompt">alfy@studio:~$</span> ./social-links.sh</p>
-            <a href="#" style="color:var(--success); text-decoration:none; margin:0 10px;">YouTube</a> | 
-            <a href="#" style="color:var(--success); text-decoration:none; margin:0 10px;">TikTok</a> | 
-            <a href="https://gamejolt.com/@Alfy18" style="color:var(--success); text-decoration:none; margin:0 10px;">GameJolt</a>
+            <p><span class="prompt">alfy@studio:~$</span> ./connect.sh</p>
+            <a href="https://www.youtube.com/@ALFY181X" class="social-link" target="_blank">▶ YouTube</a> | 
+            <a href="https://www.tiktok.com/@a181xy" class="social-link" target="_blank">📱 TikTok</a> | 
+            <a href="https://gamejolt.com/@alfy181R" class="social-link" target="_blank">⚡ GameJolt</a>
         </div>
     </div>
 
@@ -179,26 +188,28 @@
         let currentLang = 'es';
         const translations = {
             es: {
-                status: "[ System: Studio OS v2.2 | Estado: Activo ]",
+                status: "[ System: Studio OS v2.4 | Estado: Activo ]",
                 btnMore: "[ VER ARCHIVO ]",
                 close: "[ CERRAR ]",
-                descDonnie: "Fangame de FNaF (2021-Presente). Terror analógico y ambición máxima.",
-                descLada: "Historia de ficción original protagonizada por Alfy. Trama extensa.",
-                descFnafas: "Web-serie explorando cambios clave en la historia original de Scott Cawthon.",
-                infoDonnie: `<h2>DONNIE ORIGINS</h2><p><span class="prompt">>> ORIGEN:</span> Desde 2021. <br><span class="prompt">>> FORMATO:</span> Terror Analógico y animaciones.<br><span class="prompt">>> SINOPSIS:</span> Nick despierta en un lugar familiar pero desconocido. ¿Podrá sobrevivir?</p>`,
-                infoLada: `<h2>LADA</h2><p><span class="prompt">>> INFO:</span> Personajes originales. <br><span class="prompt">>> ESTATUS:</span> Trama extensa, actualmente en pausa.</p>`,
-                infoFnafas: `<h2>FNaF AS</h2><p><span class="prompt">>> CONCEPTO:</span> Web-serie "¿Qué pasaría si?". <br><span class="prompt">>> DESCRIPCIÓN:</span> Cambios en la historia original de FNaF.</p>`
+                about: "¡Hola! Soy Alfy, un pequeño creador de contenido apasionado por el arte y el desarrollo de proyectos creativos. Esta página es mi base de datos personal donde archivo mis trabajos, desde fangames de terror hasta series originales. ¡Gracias por echar un vistazo a mi mundo!",
+                descDonnie: "Fangame de FNaF en desarrollo desde 2021. Terror analógico y ambición máxima.",
+                descLada: "Proyecto basado en personajes originales. Historia de ficción con trama extensa.",
+                descFnafas: "Web-serie 'What If' basada en la historia original de FNaF con cambios clave.",
+                infoDonnie: `<h2>DONNIE ORIGINS</h2><p><span class="prompt">>> INFO:</span> Donnie Origins es un fangame de FNaF desarrollado desde 2021 que ha tenido muchos cambios a lo largo de su existencia, pero sigue siendo uno de mis proyectos más ambiciosos.</p><p><span class="prompt">>> CONTENIDO:</span> Tendrá múltiples animaciones o incluso una mini serie basada en el terror analógico y más contenido.</p><p><span class="prompt">>> SINOPSIS:</span> Se basa en que el protagonista Nick despierta aturdido en un lugar aparentemente desubicado; el sitio es familiar y se encuentra con viejos conocidos... ¿podrá sobrevivir la noche?</p>`,
+                infoLada: `<h2>LADA</h2><p><span class="prompt">>> INFO:</span> Lada es un proyecto basado en personajes originales míos, principalmente "Alfy" que se llama igual que yo.</p><p><span class="prompt">>> ESTATUS:</span> Es una historia de ficción con una trama muy extensa, pero actualmente se encuentra en pausa por priorizar otros proyectos.</p>`,
+                infoFnafas: `<h2>FNaF AS</h2><p><span class="prompt">>> CONCEPTO:</span> FNaF AS es un "What If", una web-serie en planeamiento basada en la historia original de FNaF.</p><p><span class="prompt">>> DESCRIPCIÓN:</span> Con mini episodios haciendo cambios en la historia para plantear: "¿qué pasaría si?".</p>`
             },
             en: {
-                status: "[ System: Studio OS v2.2 | Status: Active ]",
+                status: "[ System: Studio OS v2.4 | Status: Active ]",
                 btnMore: "[ VIEW FILE ]",
                 close: "[ CLOSE ]",
-                descDonnie: "FNaF Fangame (2021-Present). Analog horror and maximum ambition.",
-                descLada: "Original fiction story starring Alfy. Extensive plot.",
-                descFnafas: "Web-series exploring key changes in Scott Cawthon's original story.",
-                infoDonnie: `<h2>DONNIE ORIGINS</h2><p><span class="prompt">>> ORIGIN:</span> Since 2021. <br><span class="prompt">>> FORMAT:</span> Analog Horror and animations.<br><span class="prompt">>> SYNOPSIS:</span> Nick wakes up in a familiar yet unknown place. Can he survive the night?</p>`,
-                infoLada: `<h2>LADA</h2><p><span class="prompt">>> INFO:</span> Original characters. <br><span class="prompt">>> STATUS:</span> Extensive plot, currently on hiatus.</p>`,
-                infoFnafas: `<h2>FNaF AS</h2><p><span class="prompt">>> CONCEPT:</span> "What If?" web-series. <br><span class="prompt">>> DESCRIPTION:</span> Exploring alternative paths in the FNaF lore.</p>`
+                about: "Hi! I'm Alfy, a small content creator passionate about art and developing creative projects. This page is my personal database where I archive my work, from horror fangames to original series. Thanks for checking out my world!",
+                descDonnie: "FNaF fangame in development since 2021. Analog horror and maximum ambition.",
+                descLada: "Project based on original characters. Fiction story with an extensive plot.",
+                descFnafas: "'What If' web-series based on the original FNaF story with key changes.",
+                infoDonnie: `<h2>DONNIE ORIGINS</h2><p><span class="prompt">>> INFO:</span> Donnie Origins is a FNaF fangame developed since 2021 that has undergone many changes, yet remains one of my most ambitious projects.</p><p><span class="prompt">>> CONTENT:</span> It will feature multiple animations or even a mini-series based on analog horror and more content.</p><p><span class="prompt">>> SYNOPSIS:</span> The story follows Nick, who wakes up dazed in a seemingly disoriented place; the site is familiar and he encounters old acquaintances... can he survive the night?</p>`,
+                infoLada: `<h2>LADA</h2><p><span class="prompt">>> INFO:</span> Lada is a project based on my original characters, mainly "Alfy", named after myself.</p><p><span class="prompt">>> STATUS:</span> It is a fiction story with a very extensive plot, but it is currently on hiatus to prioritize other projects.</p>`,
+                infoFnafas: `<h2>FNaF AS</h2><p><span class="prompt">>> CONCEPT:</span> FNaF AS is a "What If" web-series in planning based on the original FNaF story.</p><p><span class="prompt">>> DESCRIPTION:</span> Featuring mini-episodes that make changes to the story to ask: "what would happen if?".</p>`
             }
         };
 
@@ -207,6 +218,7 @@
             const t = translations[currentLang];
             document.getElementById('system-status').innerText = t.status;
             document.getElementById('close-text').innerText = t.close;
+            document.getElementById('about-text').innerText = t.about;
             document.querySelectorAll('.btn-more').forEach(btn => {
                 if(btn.tagName === "BUTTON") btn.innerText = t.btnMore;
             });
